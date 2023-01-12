@@ -1,0 +1,15 @@
+stages:
+  - deploy
+
+deploy-job:
+  stage: deploy
+  when: manual
+  only:
+    - main
+  tags:
+    - deploy
+  script:
+    - rm -rf ~/webapps/$APP_NAME && mkdir ~/webapps/$APP_NAME
+    - cp Dockerfile docker-compose.yml ~/webapps/$APP_NAME
+    - cp go.* *.go ~/webapps/$APP_NAME
+    - docker-compose -f ~/webapps/$APP_NAME/docker-compose.yml up -d --build
