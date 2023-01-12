@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  app:
+    image: 'go-simple-proxy:latest'
+    build:
+      context: .
+    container_name: 'go_simple_proxy'
+    ports:
+      - '3128:8080'
